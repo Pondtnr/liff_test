@@ -10,7 +10,7 @@
                 UID: {{ lineUID }}
             </div>
             <button class="text-button" @click="toggleUIDVisibility">ข้อมูลส่วนตัว</button>
-
+            
         </div>
         <button @click="logout" class="logout-button">
             LOGOUT

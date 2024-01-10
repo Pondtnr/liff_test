@@ -8,24 +8,24 @@
                 <li>
                     <router-link to="/" v-ripple
                         class="flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-600 hover:text-900 hover:surface-100 font-medium border-round cursor-pointer transition-colors transition-duration-150 p-ripple"
-                        style="color: white !important;">
-                        <i class="pi pi-home mr-2"></i>
+                        style="color: white !important; text-decoration: none; font-size: 20px;">
+                        <i class="pi pi-home mr-2" style="font-size: 24px;"></i>
                         <span>Home</span>
                     </router-link>
                 </li>
                 <li>
                     <router-link to="/Shop" v-ripple
                         class="flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-600 hover:text-900 hover:surface-100 font-medium border-round cursor-pointer transition-colors transition-duration-150 p-ripple"
-                        style="color: white !important;">
-                        <i class="pi pi-shopping-cart mr-2"></i>
+                        style="color: white !important; text-decoration: none; font-size: 20px;">
+                        <i class="pi pi-shopping-cart mr-2" style="font-size: 24px;"></i>
                         <span>Shop</span>
                     </router-link>
                 </li>
                 <li>
                     <router-link to="/Coupon" v-ripple
                         class="flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-600 hover:text-900 hover:surface-100 font-medium border-round cursor-pointer transition-colors transition-duration-150 p-ripple"
-                        style="color: white !important;">
-                        <i class="pi pi-ticket mr-2"></i>
+                        style="color: white !important; text-decoration: none; font-size: 20px;">
+                        <i class="pi pi-ticket mr-2" style="font-size: 24px;"></i>
                         <span>Coupon</span>
                     </router-link>
                 </li>
@@ -35,7 +35,7 @@
                 <li class="border-top-1 surface-border lg:border-top-none">
                     <router-link to="Profile" v-ripple
                         class="flex px-6 p-3 lg:px-3 lg:py-2 align-items-center hover:surface-100 font-medium border-round cursor-pointer transition-colors transition-duration-150 p-ripple circle-image">
-                        <img :src="lineImage" class="mr-3 lg:mr-0 " style="width: 50px; height:50px" />
+                        <img :src="lineImage" class="mr-3 lg:mr-0 " style="width: 60px; height:60px" />
                     </router-link>
                 </li>
             </ul>
