@@ -8,76 +8,18 @@
 </head>
 
 <body>
-  <div>
-    <span id="loading">loading</span>
-
-    <div id="lineProfile" style="display: none;">
-      <img id="lineImage" width="100px" src="">
-      <div id="lineName">HelloName</div>
-      <div id="lineUID">UID : YOUR UID</div>
-      <div>
-        <input id="lineMessage" type="text">
-        <button onclick="sendMessage()">SendMes</button>
-      </div>
-    </div>
-    <button onclick="logout()">LOGOUT</button>
-
-
-  </div>
-  <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/versions/2.22.3/sdk.js"></script>
+  <div id="app"></div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+  <script src="https://static.line-scdn.net/liff/edge/versions/2.22.3/sdk.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.5/axios.min.js"
     integrity="sha512-TjBzDQIDnc6pWyeM1bhMnDxtWH0QpOXMcVooglXrali/Tj7W569/wd4E8EDjk1CwOAOPSJon1VfcEt1BI4xIrA=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/primeflex@3.0.0/css/primeflex.css">
+  <link rel="stylesheet" href="path/to/primevue.min.css" />
+
   <script>
-    
-    let userId = ''
-    
-    const main = async () => {
-      await liff.init({ liffId: '2002652641-9XEQkpez' })
-      if (!liff.isLoggedIn()) {
-        liff.login()
-        return false
-      }
-      const profile = await liff.getProfile()
-
-      loading.style.display = 'none'
-
-      //update
-      lineImage.src = profile.pictureUrl
-      lineName.textContent = `Hello : ${profile.displayName}`
-      lineUID.textContent = `UID : ${profile.userId}`
-      lineProfile.style.display = 'block'
-      userId = profile.userId
-
-      console.log('LOGIN', liff.getProfile())
-
-    }
-
-    const logout = async () => {
-      liff.logout()
-      window.location.reload()
-    }
-
-    const sendMessage = async () => {
-      try {
-        if (!lineMessage.value){
-          throw new Error ('message not found')
-        }
-        const response = await axios.post(
-          ' https://68f1-2405-9800-b901-797c-f9e0-c790-163-b159.ngrok-free.app/send-message',
-          {
-            userId,
-            message : lineMessage.value
-          }
-        )
-        console.log('response',response.data)   
-      } catch (error) {
-        console.log('error',error)
-      }
-      
-     
-    }
-    main()
+    const app = Vue.createApp({});
+    const vm = app.mount('#app');
   </script>
 </body>
 
