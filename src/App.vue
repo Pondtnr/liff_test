@@ -92,8 +92,11 @@
 <script>
 /* eslint-disable */ // Disabling ESLint for the entire script block
 import axios from 'axios';
-
+import Profile from './components/Profile.vue';
 export default {
+    components:{
+        Profile,
+    },
     data() {
         return {
             loading: true,
