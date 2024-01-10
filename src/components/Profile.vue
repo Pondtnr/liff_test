@@ -6,8 +6,11 @@
         <div v-show="lineProfileVisible" class="centerd-content ">
             <img :src="lineImage" width="280px" alt="Line Profile Image" class="rounded-circle">
             <div class="font-size">{{ lineName }}</div>
-            <!-- <div>UID: {{ lineUID }}</div> -->
-            <button class="text-button">ข้อมูลส่วนตัว</button>
+            <div v-if="isUIDVisible">
+                UID: {{ lineUID }}
+            </div>
+            <button class="text-button" @click="toggleUIDVisibility">ข้อมูลส่วนตัว</button>
+
         </div>
         <button @click="logout" class="logout-button">
             LOGOUT
@@ -31,6 +34,7 @@ export default {
             lineUID: 'UID: YOUR UID',
             lineMessage: '',
             userId: '',
+            isUIDVisible: false,
         };
     },
     methods: {
@@ -52,6 +56,9 @@ export default {
             this.userId = profile.userId;
 
             console.log('LOGIN', liff.getProfile());
+        },
+        toggleUIDVisibility() {
+            this.isUIDVisible = !this.isUIDVisible;
         },
         logout() {
             liff.logout();
@@ -84,8 +91,9 @@ export default {
 
 <style scoped>
 .font-size {
-  font-size: 20px; 
+    font-size: 20px;
 }
+
 .container {
     display: flex;
     flex-direction: column;
@@ -109,7 +117,7 @@ export default {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px; 
+    margin-top: 10px;
 }
 
 .text-button {
@@ -119,6 +127,6 @@ export default {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px; 
+    margin-top: 10px;
 }
 </style>
