@@ -1,10 +1,11 @@
 <template>
-   <div class="bg-blue-900 px-1 shadow-2 flex align-items-center justify-content-between relative lg:static border-bottom-1 border-gray-800" style="min-height: 90px; width: 100%;">
-  <img src="@/assets/TEST LINE LIFF .png" alt="Image" height="60" class="mr-0 lg:mr-6 circle-image" />
+    <div class=" bg-blue-900 px-1 shadow-2 flex align-items-center justify-content-between relative lg:static border-bottom-1 border-gray-800"
+        style="min-height: 90px; width: 100%;">
+        <img src="@/assets/TEST LINE LIFF .png" alt="Image" height="60" class="mr-0 lg:mr-6 circle-image" />
 
-  <div class="align-items-center flex-grow-1 justify-content-between hidden lg:flex absolute lg:static w-full 
+        <div class="align-items-center flex-grow-1 justify-content-between hidden lg:flex absolute lg:static w-full 
     bg-blue-900 left-0 top-0 z-1 shadow-2 lg:shadow-none border-1 lg:border-none border-gray-800 w-full">
-    <ul class="list-none p-0 m-0 flex lg:align-items-center select-none flex-column lg:flex-row w-full">
+            <ul class="list-none p-0 m-0 flex lg:align-items-center select-none flex-column lg:flex-row w-full">
                 <li>
                     <router-link to="/" v-ripple
                         class="flex px-6 p-3 lg:px-3 lg:py-2 align-items-center text-600 hover:text-900 hover:surface-100 font-medium border-round cursor-pointer transition-colors transition-duration-150 p-ripple"
@@ -73,18 +74,7 @@
     </ul>
 
     <router-view></router-view>
-
-    <!-- <div>
-        <span v-show="loading">loading</span>
-
-        <div v-show="lineProfileVisible">
-            <img :src="lineImage" width="100px" alt="Line Profile Image">
-            <div>Hello: {{ lineName }}</div>
-            <div>UID: {{ lineUID }}</div>
-
-        </div>
-        <button @click="logout">LOGOUT</button>
-    </div> -->
+    
 </template>
   
 
@@ -94,7 +84,7 @@
 import axios from 'axios';
 import Profile from './components/Profile.vue';
 export default {
-    components:{
+    components: {
         Profile,
     },
     data() {
@@ -107,7 +97,7 @@ export default {
             lineMessage: '',
             userId: '',
             isMenuOpen: false,
-            isMobile: false,
+            isMobile: true,
         };
     },
     methods: {
@@ -144,33 +134,41 @@ export default {
             liff.logout();
             window.location.reload();
         },
+        handleScroll() {
+            if (this.isMenuOpen) {
+                this.isMenuOpen = false;
+            }},
         async sendMessage() {
-            try {
-                if (!this.lineMessage) {
-                    throw new Error('message not found');
-                }
-                const response = await axios.post(
-                    'https://3242-180-183-202-88.ngrok-free.app/send-message',
-                    {
-                        userId: this.userId,
-                        message: this.lineMessage,
+                try {
+                    if (!this.lineMessage) {
+                        throw new Error('message not found');
                     }
-                );
-                console.log('response', response.data);
-            } catch (error) {
-                console.log('error', error);
-            }
+                    const response = await axios.post(
+                        'https://3242-180-183-202-88.ngrok-free.app/send-message',
+                        {
+                            userId: this.userId,
+                            message: this.lineMessage,
+                        }
+                    );
+                    console.log('response', response.data);
+                } catch (error) {
+                    console.log('error', error);
+                }
+            },
         },
-    },
-    mounted() {
-        this.main();
-        this.isMobile = window.innerWidth <= 768;
-        window.addEventListener('resize', this.handleResize);
-    },
-    beforeDestroy() {
-        window.removeEventListener('resize', this.handleResize);
-    },
-};
+        mounted() {
+            this.main();
+            this.isMobile = window.innerWidth <= 768;
+            window.addEventListener('resize', this.handleResize);
+            window.addEventListener('scroll', this.handleScroll);
+
+        },
+        beforeDestroy() {
+            window.removeEventListener('resize', this.handleResize);
+            window.removeEventListener('scroll', this.handleScroll);
+
+        },
+    };
 </script>
 
 
@@ -178,9 +176,20 @@ export default {
 @import "~primeflex/primeflex.css";
 
 .responsive-menu {
-    list-style: none;
     padding: 0;
     margin: 0;
+    position: fixed;
+    top: 50;
+    left: 0;
+    width: 100%;
+    height: 20%;
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Semi-transparent black background */
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .menu-item {
